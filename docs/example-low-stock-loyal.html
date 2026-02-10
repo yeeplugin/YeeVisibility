@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example: Low Stock for Loyal Customers - Yeekit Visibility</title>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --primary: #2271b1;
+            --text: #3c434a;
+            --sidebar-bg: #f0f6fc;
+            --border: #dcdcde;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            margin: 0;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Layout */
+        .docs-sidebar {
+            width: 280px;
+            background: var(--sidebar-bg);
+            border-right: 1px solid var(--border);
+            padding: 30px 20px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+
+        .docs-content {
+            flex-grow: 1;
+            padding: 40px 60px;
+            max-width: 900px;
+        }
+
+        /* Navigation */
+        .docs-nav h3 {
+            font-size: 0.85em;
+            text-transform: uppercase;
+            color: #777;
+            letter-spacing: 0.05em;
+            margin-bottom: 10px;
+            margin-top: 25px;
+        }
+
+        .docs-nav h3:first-child {
+            margin-top: 0;
+        }
+
+        .docs-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .docs-nav li {
+            margin-bottom: 5px;
+        }
+
+        .docs-nav a {
+            display: block;
+            padding: 8px 12px;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.95em;
+            transition: background 0.2s;
+        }
+
+        .docs-nav a:hover {
+            background: #e0e0e0;
+        }
+
+        .docs-nav a.active {
+            background: var(--primary);
+            color: white;
+            font-weight: 500;
+        }
+
+        .docs-nav a strong {
+            color: var(--primary);
+        }
+
+        .docs-nav a.active strong {
+            color: white;
+        }
+
+        /* Typography */
+        h1 {
+            color: #23282d;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 15px;
+            margin-top: 0;
+        }
+
+        h2 {
+            color: #23282d;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            color: #23282d;
+            margin-top: 30px;
+            font-size: 1.2em;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        .step-list {
+            counter-reset: step;
+            list-style: none;
+            padding: 0;
+        }
+
+        .step-list li {
+            position: relative;
+            padding-left: 40px;
+            margin-bottom: 20px;
+        }
+
+        .step-list li::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 30px;
+            height: 30px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+        }
+
+        .alert-box {
+            background: #eef2ff;
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+
+            .docs-sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+                padding: 20px;
+            }
+
+            .docs-content {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <aside class="docs-sidebar">
+        <div class="docs-nav">
+            <h3>Getting Started</h3>
+            <ul>
+                <li><a href="index.html#overview">Overview</a></li>
+                <li><a href="index.html#installation">Installation</a></li>
+                <li><a href="index.html#configuration">Configuration</a></li>
+            </ul>
+
+            <h3>Usage</h3>
+            <ul>
+                <li><a href="index.html#rules">Creating Rules</a></li>
+                <li><a href="index.html#conditions">Condition Types</a></li>
+                <li><a href="index.html#global-settings">Global Settings</a></li>
+                <li><a href="example-vip-perfume.html"><strong>Example: VIP
+                            Exclusive</strong></a></li>
+                <li><a href="example-geo-location.html"><strong>Example: Geo
+                            Location</strong></a></li>
+                <li><a href="example-has-purchased.html"><strong>Example: Buyer
+                            Exclusive</strong></a></li>
+                <li><a href="example-low-stock-loyal.html" class="active"><strong>Example:
+                            Low Stock Priority</strong></a></li>
+                <li><a href="example-min-order-total.html"><strong>Example: Min Order
+                            Total</strong></a></li>
+                <li><a href="example-cart-contains.html"><strong>Example: Cross-Sell by
+                            Cart</strong></a></li>
+            </ul>
+
+            <h3>Support</h3>
+            <ul>
+                <li><a href="index.html#faq">FAQ</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <main class="docs-content">
+        <h1>Example: Reserve Low Stock for Loyal Customers</h1>
+        <p>In this guide, we will reserve products with <strong>Low Stock</strong> so they are <strong>ONLY available to
+                customers who have purchased from us before</strong>.</p>
+
+        <div class="alert-box">
+            <strong>Goal:</strong> Prevent new/scalper accounts from buying scarce items, prioritizing loyal returning
+            customers.
+        </div>
+
+        <h2>Step-by-Step Configuration</h2>
+
+        <ol class="step-list">
+            <li>
+                <h3>Create a New Rule</h3>
+                <p>Go to <strong>Settings > Product Visibility > Rules</strong> and click <strong>Add Rule</strong>.</p>
+            </li>
+
+            <li>
+                <h3>Set General Info</h3>
+                <p><strong>Title:</strong> Low Stock for Loyal Customers<br>
+                    <strong>Enabled:</strong> Yes
+                </p>
+            </li>
+
+            <li>
+                <h3>Define What to Hide (Scarce Items)</h3>
+                <p>We want to apply this to <strong>ALL Products</strong>, but only when they are low on stock.</p>
+                <p><strong>Filter Type:</strong> All Products<br>
+                    <strong>Filter Value:</strong> (Leave empty / All)
+                </p>
+            </li>
+
+            <li>
+                <h3>Choose "Show" (Whitelist)</h3>
+                <p>We want to ensure that IF stock is low, ONLY the following people can see it.</p>
+                <p><strong>Visibility Action:</strong> Show (Whitelist)</p>
+            </li>
+
+            <li>
+                <h3>Add Condition 1: The Trigger (Low Stock)</h3>
+                <p>We only want this rule to kick in when stock is low.</p>
+                <p><strong>Condition Type:</strong> Stock Status<br>
+                    <strong>Operator:</strong> Is<br>
+                    <strong>Value:</strong> Low Stock
+                </p>
+                <p><em>(Make sure you have managed stock enabled in WooCommerce for this to work effectively).</em></p>
+            </li>
+
+            <li>
+                <h3>Add Condition 2: The Audience (Loyal Customers)</h3>
+                <p>Who is allowed to buy low stock items? Anyone who has made at least one purchase.</p>
+                <p><strong>Condition Type:</strong> Has Purchased (Any Product)<br>
+                    <strong>Operator:</strong> True (Has orders)
+                </p>
+                <p><em>Alternatively, you could use "User Role" = Customer.</em></p>
+            </li>
+            <li>
+                <h3>Important: Logical Logic</h3>
+                <p>Wait! If we just list both conditions, Yeekit typically requires ALL conditions to match for the
+                    "Show" action.
+                    <br>However, "Stock Status" works as a property of the product.
+                    <br>So the logic becomes: <strong>Is the product Low Stock? AND Is the User a Buyer?</strong> ->
+                    Then <strong>SHOW</strong>.
+                </p>
+                <p>But what if the product is <strong>In Stock</strong>? It won't match the "Low Stock" condition. If it
+                    doesn't match, the "Show" rule fails, and the product gets HIDDEN for everyone!</p>
+
+                <div class="alert-box" style="background:#fff5f5; border-color:#e11d48; color:#be123c;">
+                    <strong>CRITICAL TIP:</strong> To make this logic work perfectly (Hide ONLY if low stock AND not
+                    loyal), it is often easier to use the <strong>HIDE</strong> Action with <strong>Negative
+                        Logic</strong>.
+                </div>
+            </li>
+
+            <li>
+                <h3>Let's Refine the Strategy (The "Hide" Approach)</h3>
+                <p>Let's flip it. We want to <strong>HIDE</strong> products <strong>IF</strong> they are Low Stock
+                    <strong>AND</strong> the user has <strong>NOT</strong> purchased before.
+                </p>
+
+                <p><strong>Action:</strong> Hide Completely</p>
+
+                <p><strong>Condition 1:</strong><br>
+                    Type: Stock Status<br>
+                    Value: Low Stock</p>
+
+                <p><strong>Condition 2:</strong><br>
+                    Type: Has Purchased (Any)<br>
+                    Operator: FALSE (Has NOT purchased)</p>
+            </li>
+
+            <li>
+                <h3>Save the Rule</h3>
+                <p>Click <strong>Save Rule</strong>.</p>
+            </li>
+        </ol>
+
+        <hr>
+
+        <h2>Result</h2>
+        <ul>
+            <li><strong>Product In Stock:</strong> Visible to everyone (Rule doesn't trigger Condition 1).</li>
+            <li><strong>Product Low Stock + New User:</strong> Matches both conditions -> <strong>HIDDEN</strong>.</li>
+            <li><strong>Product Low Stock + Loyal Customer:</strong> Fails Condition 2 -> <strong>VISIBLE</strong>.</li>
+        </ul>
+
+    </main>
+
+</body>
+
+</html>

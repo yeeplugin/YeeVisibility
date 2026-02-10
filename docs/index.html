@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yeekit Visibility Documentation</title>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --primary: #5b21b6;
+            /* Yeekit Brand Color */
+            --text: #333;
+            --sidebar-bg: #f7f7f7;
+            --border: #eee;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            margin: 0;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Layout */
+        .docs-sidebar {
+            width: 280px;
+            background: var(--sidebar-bg);
+            border-right: 1px solid var(--border);
+            padding: 30px 20px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+
+        .docs-content {
+            flex-grow: 1;
+            padding: 40px 60px;
+            max-width: 900px;
+        }
+
+        /* Navigation */
+        .docs-nav h3 {
+            font-size: 0.85em;
+            text-transform: uppercase;
+            color: #777;
+            letter-spacing: 0.05em;
+            margin-bottom: 10px;
+            margin-top: 25px;
+        }
+
+        .docs-nav h3:first-child {
+            margin-top: 0;
+        }
+
+        .docs-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .docs-nav li {
+            margin-bottom: 5px;
+        }
+
+        .docs-nav a {
+            display: block;
+            padding: 8px 12px;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.95em;
+            transition: background 0.2s;
+        }
+
+        .docs-nav a:hover {
+            background: #e0e0e0;
+        }
+
+        .docs-nav a.active {
+            background: var(--primary);
+            color: white;
+            font-weight: 500;
+        }
+
+        .docs-nav a strong {
+            color: var(--primary);
+        }
+
+        .docs-nav a.active strong {
+            color: white;
+        }
+
+        /* Typography */
+        h1 {
+            color: #23282d;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 15px;
+            margin-top: 0;
+        }
+
+        h2 {
+            color: #23282d;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            border-bottom: 1px solid var(--border);
+            /* Added for consistency */
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            color: #23282d;
+            margin-top: 30px;
+            font-size: 1.2em;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        code {
+            background-color: #f3f4f6;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+            color: #ef4444;
+        }
+
+        pre {
+            background-color: #1f2937;
+            color: #f9fafb;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        .alert {
+            padding: 1rem;
+            background-color: #fffbeb;
+            border-left: 4px solid #f59e0b;
+            color: #92400e;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .alert-info {
+            background-color: #eff6ff;
+            border-left-color: #3b82f6;
+            color: #1e40af;
+        }
+
+        ul.guide-list {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        ul.guide-list li {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            padding: 20px;
+            transition: box-shadow 0.2s;
+        }
+
+        ul.guide-list li:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-color: #ddd;
+        }
+
+        ul.guide-list h3 {
+            margin-top: 0;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        ul.guide-list p {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 0;
+        }
+
+        ul.guide-list a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            height: 100%;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+
+            .docs-sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+                padding: 20px;
+            }
+
+            .docs-content {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <aside class="docs-sidebar">
+        <div class="docs-nav">
+            <h3>Getting Started</h3>
+            <ul>
+                <li><a href="#overview" class="active">Overview</a></li>
+                <li><a href="#installation">Installation</a></li>
+                <li><a href="#configuration">Configuration</a></li>
+            </ul>
+
+            <h3>Usage</h3>
+            <ul>
+                <li><a href="#rules">Creating Rules</a></li>
+                <li><a href="#conditions">Condition Types</a></li>
+                <li><a href="#global-settings">Global Settings</a></li>
+                <li><a href="example-vip-perfume.html"><strong>Example: VIP
+                            Exclusive</strong></a></li>
+                <li><a href="example-geo-location.html"><strong>Example: Geo
+                            Location</strong></a></li>
+                <li><a href="example-has-purchased.html"><strong>Example: Buyer
+                            Exclusive</strong></a></li>
+                <li><a href="example-low-stock-loyal.html"><strong>Example: Low Stock
+                            Priority</strong></a></li>
+                <li><a href="example-min-order-total.html"><strong>Example: Min Order
+                            Total</strong></a></li>
+                <li><a href="example-cart-contains.html"><strong>Example: Cross-Sell by
+                            Cart</strong></a></li>
+            </ul>
+
+            <h3>Support</h3>
+            <ul>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <main class="docs-content">
+        <section id="overview">
+            <h1>Yeekit Visibility Documentation</h1>
+            <p><strong>Yeekit Visibility</strong> is a comprehensive WooCommerce plugin giving you granular control over
+                product visibility and access permissions. Restrict products by user role, location, login status, and
+                more.</p>
+
+            <h3>Key Features</h3>
+            <ul class="guide-list">
+                <li>
+                    <a href="#rules">
+                        <h3>Flexible Targeting →</h3>
+                        <p>Apply rules to Products, Categories, Tags, Brands, or Attributes.</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#conditions">
+                        <h3>Advanced Conditions →</h3>
+                        <p>Filter by User Role, Geo Location, Cart Total, Purchase History, etc.</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#global-settings">
+                        <h3>Search Protection →</h3>
+                        <p>Automatically exclude hidden products from search and catalog queries.</p>
+                    </a>
+                </li>
+            </ul>
+        </section>
+
+        <section id="installation">
+            <h2>Installation</h2>
+            <ol>
+                <li>Download the `yeevisibility.zip` file.</li>
+                <li>Go to WordPress Admin > <strong>Plugins > Add New</strong>.</li>
+                <li>Upload the plugin ZIP file and click <strong>Install Now</strong>.</li>
+                <li>Activate the plugin.</li>
+            </ol>
+        </section>
+
+        <section id="configuration">
+            <h2>Configuration</h2>
+            <p>Settings are located at: <code>WooCommerce > Settings > Product Visibility</code>.</p>
+            <p>The interface has two main tabs:</p>
+            <ul>
+                <li><strong>Rules:</strong> Manage specific visibility rules.</li>
+                <li><strong>Settings:</strong> Configure global behavior like Search Hiding and Redirect URLs.</li>
+            </ul>
+        </section>
+
+        <section id="rules">
+            <h2>Creating Rules</h2>
+            <p>Go to the <strong>Rules</strong> tab and click <strong>Add Rule</strong>.</p>
+            <h3>Rule Components</h3>
+            <ul>
+                <li><strong>Filter Type:</strong> What are you targeting? (e.g., specific Category).</li>
+                <li><strong>Filter Value:</strong> Which items? (e.g., "Wholesale" category).</li>
+                <li><strong>Action:</strong>
+                    <ul>
+                        <li><strong>Hide Completely:</strong> Remove from shop and search.</li>
+                        <li><strong>Restrict Access:</strong> Show in catalog but block single product page.</li>
+                    </ul>
+                </li>
+                <li><strong>Conditions:</strong> Who does this apply to? (See below).</li>
+            </ul>
+        </section>
+
+        <section id="conditions">
+            <h2>Condition Types</h2>
+            <p>Combine conditions to create powerful logic.</p>
+            <ul class="guide-list">
+                <li>
+                    <a href="#">
+                        <h3>User Role</h3>
+                        <p>Target specific roles (e.g. Wholesale, VIP).</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <h3>Geo Location</h3>
+                        <p>Restrict by Country or State.</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <h3>Cart Logic</h3>
+                        <p>Based on Cart Total or Items in Cart.</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <h3>User History</h3>
+                        <p>Based on products previously purchased.</p>
+                    </a>
+                </li>
+            </ul>
+        </section>
+
+        <section id="global-settings">
+            <h2>Global Settings</h2>
+            <p>Control plugin-wide behavior.</p>
+            <ul>
+                <li><strong>Hide from Search:</strong> Remove hidden products from search results.</li>
+                <li><strong>Hide from Catalog:</strong> Remove form Shop/Category pages.</li>
+                <li><strong>Global Redirect URL:</strong> Default destination for restricted users.</li>
+                <li><strong>Allow Search Bots:</strong> Let Google/Bing index hidden content (use with caution).</li>
+            </ul>
+        </section>
+
+        <section id="faq">
+            <h2>FAQ</h2>
+            <p><strong>Q: Why are products still visible in search?</strong><br>
+                A: Check Global Settings > "Hide from Search". Also clear your site cache.</p>
+
+            <p><strong>Q: Can I schedule visibility?</strong><br>
+                A: Yes, use the "Date & Time" condition in your rule.</p>
+        </section>
+
+    </main>
+
+
+</body>
+
+</html>

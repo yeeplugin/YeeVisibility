@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example: VIP Exclusive Products - Yeekit Visibility</title>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --primary: #2271b1;
+            --text: #3c434a;
+            --sidebar-bg: #f0f6fc;
+            --border: #dcdcde;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            margin: 0;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Layout */
+        .docs-sidebar {
+            width: 280px;
+            background: var(--sidebar-bg);
+            border-right: 1px solid var(--border);
+            padding: 30px 20px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+
+        .docs-content {
+            flex-grow: 1;
+            padding: 40px 60px;
+            max-width: 900px;
+        }
+
+        /* Navigation */
+        .docs-nav h3 {
+            font-size: 0.85em;
+            text-transform: uppercase;
+            color: #777;
+            letter-spacing: 0.05em;
+            margin-bottom: 10px;
+            margin-top: 25px;
+        }
+
+        .docs-nav h3:first-child {
+            margin-top: 0;
+        }
+
+        .docs-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .docs-nav li {
+            margin-bottom: 5px;
+        }
+
+        .docs-nav a {
+            display: block;
+            padding: 8px 12px;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.95em;
+            transition: background 0.2s;
+        }
+
+        .docs-nav a:hover {
+            background: #e0e0e0;
+        }
+
+        .docs-nav a.active {
+            background: var(--primary);
+            color: white;
+            font-weight: 500;
+        }
+
+        .docs-nav a strong {
+            color: var(--primary);
+        }
+
+        .docs-nav a.active strong {
+            color: white;
+        }
+
+        /* Typography */
+        h1 {
+            color: #23282d;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 15px;
+            margin-top: 0;
+        }
+
+        h2 {
+            color: #23282d;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            color: #23282d;
+            margin-top: 30px;
+            font-size: 1.2em;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            margin: 10px 0;
+        }
+
+        .step-list {
+            counter-reset: step;
+            list-style: none;
+            padding: 0;
+        }
+
+        .step-list li {
+            position: relative;
+            padding-left: 40px;
+            margin-bottom: 20px;
+        }
+
+        .step-list li::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 30px;
+            height: 30px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+        }
+
+        .alert-box {
+            background: #eef2ff;
+            /* Light indigo background */
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+
+            .docs-sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+                padding: 20px;
+            }
+
+            .docs-content {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <aside class="docs-sidebar">
+        <div class="docs-nav">
+            <h3>Getting Started</h3>
+            <ul>
+                <li><a href="index.html#overview">Overview</a></li>
+                <li><a href="index.html#installation">Installation</a></li>
+                <li><a href="index.html#configuration">Configuration</a></li>
+            </ul>
+
+            <h3>Usage</h3>
+            <ul>
+                <li><a href="index.html#rules">Creating Rules</a></li>
+                <li><a href="index.html#conditions">Condition Types</a></li>
+                <li><a href="index.html#global-settings">Global Settings</a></li>
+                <li><a href="example-vip-perfume.html" class="active"><strong>Example:
+                            VIP Exclusive</strong></a></li>
+                <li><a href="example-geo-location.html"><strong>Example: Geo
+                            Location</strong></a></li>
+                <li><a href="example-has-purchased.html"><strong>Example: Buyer
+                            Exclusive</strong></a></li>
+                <li><a href="example-low-stock-loyal.html"><strong>Example: Low Stock
+                            Priority</strong></a></li>
+                <li><a href="example-min-order-total.html"><strong>Example: Min Order
+                            Total</strong></a></li>
+                <li><a href="example-cart-contains.html"><strong>Example: Cross-Sell by
+                            Cart</strong></a></li>
+            </ul>
+
+            <h3>Support</h3>
+            <ul>
+                <li><a href="index.html#faq">FAQ</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <main class="docs-content">
+        <h1>Example: VIP Exclusive Perfume</h1>
+        <p>In this guide, we will set up a rule to ensure that products in the <strong>"High-End Perfume"</strong>
+            category are <strong>ONLY sold to users with the 'VIP' role</strong>.</p>
+
+        <div class="alert-box">
+            <strong>Goal:</strong> Hide high-end perfumes from everyone (guests, regular customers) EXCEPT users who
+            have the 'VIP' role.
+        </div>
+
+        <h2>Step-by-Step Configuration</h2>
+
+        <ol class="step-list">
+            <li>
+                <h3>Create a New Rule</h3>
+                <p>Navigate to <strong>WooCommerce > Settings > Product Visibility > Rules</strong> and click
+                    <strong>Add Rule</strong>.
+                </p>
+            </li>
+
+            <li>
+                <h3>Set General Info</h3>
+                <p><strong>Title:</strong> VIP Perfume Exclusive<br>
+                    <strong>Enabled:</strong> Yes
+                </p>
+            </li>
+
+            <li>
+                <h3>Define What to Hide (The Content)</h3>
+                <p>We want to target a specific category.</p>
+                <p><strong>Filter Type:</strong> Category<br>
+                    <strong>Filter Value:</strong> High-End Perfume (Select your category here)
+                </p>
+            </li>
+
+            <li>
+                <h3>Choose the "Whitelist" Action</h3>
+                <p>We want to "Show" this <strong>only</strong> to specific people. This implicitly hides it from
+                    everyone else.</p>
+                <p><strong>Visibility Action:</strong> Show (Whitelist)</p>
+                <p><em>Note: When you use "Show", Yeekit automatically hides the matching products from anyone who
+                        doesn't meet the conditions below.</em></p>
+            </li>
+
+            <li>
+                <h3>Set the Condition (The VIP)</h3>
+                <p>We want only VIPs to pass this rule.</p>
+                <p><strong>Condition Type:</strong> Role<br>
+                    <strong>Operator:</strong> IN<br>
+                    <strong>Value:</strong> VIP (or Administrator, VIP, etc.)
+                </p>
+            </li>
+
+            <li>
+                <h3>Save the Rule</h3>
+                <p>Click <strong>Save Rule</strong>.</p>
+            </li>
+        </ol>
+
+        <hr>
+
+        <h2>Result</h2>
+        <ul>
+            <li><strong>If User is VIP:</strong> They see the "High-End Perfume" products in the shop, search results,
+                and can purchase them normally.</li>
+            <li><strong>If User is Guest / Regular Customer:</strong> The products disappear completely from the Shop
+                and Search results. If they try to access a direct link, they will be redirected (based on Global
+                Settings).</li>
+        </ul>
+
+        <h2>Alternative: "Look but Don't Touch"</h2>
+        <p>If you want non-VIPs to <strong>see</strong> the products but <strong>not buy</strong> them (to create FOMO):
+        </p>
+        <ol>
+            <li>Change <strong>Visibility Action</strong> to <strong>Restrict Access</strong>.</li>
+            <li>In <strong>Redirect Mode</strong>, choose <strong>Show Message</strong>.</li>
+            <li>Set <strong>Message</strong> to: <em>"This exclusive perfume is reserved for our VIP members."</em></li>
+            <li>Use the same Conditions (Role IN VIP).</li>
+        </ol>
+        <p>Now, non-VIPs can find the product, but the "Add to Cart" button is replaced with your message.</p>
+
+    </main>
+
+</body>
+
+</html>
